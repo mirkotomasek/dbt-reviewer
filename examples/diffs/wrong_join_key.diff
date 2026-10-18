@@ -1,0 +1,21 @@
+--- a/models/eval_wrong_join_key.sql
++++ b/models/eval_wrong_join_key.sql
+@@ -0,0 +1,18 @@
++with orders as (
++    select order_id, customer_id
++    from {{ ref('stg_orders') }}
++),
++
++payments as (
++    select payment_id, order_id, amount
++    from {{ ref('stg_payments') }}
++)
++
++select
++    orders.order_id,
++    payments.payment_id,
++    payments.amount
++from orders
++
++left join payments
++    on orders.customer_id = payments.order_id

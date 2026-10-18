@@ -1,0 +1,6 @@
+--- a/models/legacy.sql
++++ b/models/legacy.sql
+@@ -1,2 +1,3 @@
+ -- Existing wildcard used only to evaluate changed-line precision.
+ select * from {{ ref('stg_orders') }}
++-- harmless reviewer evaluation comment

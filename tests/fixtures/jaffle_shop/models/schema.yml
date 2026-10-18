@@ -1,0 +1,11 @@
+# Adapted from jaffle_shop_duckdb: only output key declarations retained.
+version: 2
+models:
+  - name: orders
+    columns:
+      - name: order_id
+        tests: [unique, not_null]
+  - name: customers
+    columns:
+      - name: customer_id
+        tests: [unique, not_null]

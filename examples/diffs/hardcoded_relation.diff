@@ -1,0 +1,4 @@
+--- a/models/eval_hardcoded.sql
++++ b/models/eval_hardcoded.sql
+@@ -0,0 +1 @@
++select * from analytics.stg_orders

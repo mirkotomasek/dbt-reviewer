@@ -1,0 +1,5 @@
+# Minimal adaptation for reviewer evaluation; not an executable dbt project.
+name: jaffle_shop
+version: '1.0'
+config-version: 2
+model-paths: [models]

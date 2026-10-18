@@ -1,0 +1,42 @@
+[
+  {
+    "check_id": "JOIN_KEY",
+    "file": "models/eval_wrong_join_key.sql",
+    "line": 18,
+    "severity": "error",
+    "message": "The join compares `orders.customer_id` with `payments.order_id`, so it matches customer IDs against order IDs instead of attaching payments to their orders; payments may be omitted or attributed to the wrong order.",
+    "suggestion": "Join on `orders.order_id = payments.order_id`.",
+    "confidence": "high",
+    "engine_rule": null,
+    "source": "semantic",
+    "evidence": [
+      {
+        "status": "confirmed_fact",
+        "statement": "`stg_orders.customer_id` is projected from `user_id`, while `stg_orders.order_id` is projected from `id`.",
+        "reference": {
+          "file": "models/staging/stg_orders.sql",
+          "line": 3,
+          "end_line": 4
+        }
+      },
+      {
+        "status": "confirmed_fact",
+        "statement": "`stg_payments.order_id` is projected from the raw payment `order_id` column.",
+        "reference": {
+          "file": "models/staging/stg_payments.sql",
+          "line": 4,
+          "end_line": 4
+        }
+      },
+      {
+        "status": "confirmed_fact",
+        "statement": "The changed model joins `orders.customer_id` to `payments.order_id`.",
+        "reference": {
+          "file": "models/eval_wrong_join_key.sql",
+          "line": 18,
+          "end_line": 18
+        }
+      }
+    ]
+  }
+]

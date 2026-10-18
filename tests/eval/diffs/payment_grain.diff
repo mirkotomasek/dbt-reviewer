@@ -1,0 +1,24 @@
+--- a/models/eval_payment_grain.sql
++++ b/models/eval_payment_grain.sql
+@@ -0,0 +1,21 @@
++with orders as (
++    select order_id, customer_id, order_date
++    from {{ ref('stg_orders') }}
++),
++
++payments as (
++    select payment_id, order_id, payment_method, amount
++    from {{ ref('stg_payments') }}
++)
++
++select
++    payments.payment_id,
++    orders.order_id,
++    orders.customer_id,
++    orders.order_date,
++    payments.payment_method,
++    payments.amount
++from orders
++
++inner join payments
++    on orders.order_id = payments.order_id

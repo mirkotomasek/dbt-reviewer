@@ -1,0 +1,16 @@
+--- a/models/eval_strings.sql
++++ b/models/eval_strings.sql
+@@ -0,0 +1,13 @@
++with orders as (
++    select order_id, customer_id
++    from {{ ref('stg_orders') }}
++)
++
++select
++    order_id,
++    customer_id,
++    'select * from production.secret_table' as example_text
++from orders
++
++-- Example of something we should never write:
++-- select * from analytics.orders

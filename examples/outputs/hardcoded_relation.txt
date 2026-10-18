@@ -1,0 +1,9 @@
+2 findings (1 error, 1 warning)
+
+ERROR D001 models/eval_hardcoded.sql:1
+Hardcoded relation `analytics.stg_orders` bypasses dbt dependency tracking.
+Fix: Use `ref()` for a dbt model or `source()` for a declared source.
+
+WARNING SELECT_STAR models/eval_hardcoded.sql:1
+Wildcard projection makes the output schema implicit and can propagate unexpected upstream columns.
+Fix: Select the required columns explicitly.

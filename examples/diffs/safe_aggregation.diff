@@ -1,0 +1,28 @@
+--- a/models/eval_safe_aggregation.sql
++++ b/models/eval_safe_aggregation.sql
+@@ -0,0 +1,25 @@
++with orders as (
++    select
++        order_id,
++        customer_id
++    from {{ ref('stg_orders') }}
++),
++
++payments as (
++    select
++        order_id,
++        sum(amount) as amount
++    from {{ ref('stg_payments') }}
++    group by order_id
++)
++
++select
++    orders.customer_id,
++    count(*) as number_of_orders,
++    sum(payments.amount) as lifetime_value
++from orders
++
++left join payments
++    on orders.order_id = payments.order_id
++
++group by orders.customer_id
